@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Your Booking Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #007BFF;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            text-align: left;
+            background-color: #f1f1f1;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #777;
+            text-align: center;
+        }
+        .timestamp {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #555;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Booking Confirmation</h2>
+    <p>Dear {{fullName}},</p>
+    <p>Thank you for booking with us! Here are your booking details:</p>
+
+    <table>
+        {{bookingTable}}
+    </table>
+
+    <div class="timestamp">
+        Booking created on: {{timestamp}}
+    </div>
+
+    <p>We look forward to serving you!</p>
+    <div class="footer">
+        &copy; 2025 NK Drop Taxi. All rights reserved.
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>New Booking Received</title>
+	<style>
+		body { 
+			font-family: Arial, sans-serif; 
+			background-color: #f4f6f9; 
+			padding: 20px; 
+		}
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 700px;
+            margin: auto;
+            border: 2px solid #007BFF;
+        }
+        h2 { 
+			color: #007BFF; 
+			border-bottom: 2px solid #eee; 
+			padding-bottom: 8px; 
+		}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th { 
+			background: #007BFF; 
+			color: white; 
+		}
+		.timestamp {
+			margin-top: 10px;
+			font-size: 12px;
+			color: #555;
+			font-style: italic;
+		}
+	</style>
+</head>
+<body>
+<div class="container">
+	<h2>New Booking Request</h2>
+	<p>You have received a new booking request. Details are below:</p>
+
+	<table>
+		<thead>
+		<tr>
+			<th>Field</th>
+			<th>Value</th>
+		</tr>
+		</thead>
+		<tbody>
+		{{bookingTable}}
+		</tbody>
+	</table>
+
+	<div class="timestamp">
+		Booking created on: {{timestamp}}
+	</div>
+
+	<p>Please process this request at the earliest.</p>
+</div>
+</body>
+</html>

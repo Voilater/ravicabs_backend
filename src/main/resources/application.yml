@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: ravi_cabs
+  mail:
+    host: smtp.hostinger.com
+    port: 465
+    username: enquiry@nkdroptaxi.com
+    password: Nkdroptaxi@123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            enable: true
