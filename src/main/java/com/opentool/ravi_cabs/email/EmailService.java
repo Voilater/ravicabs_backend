@@ -42,14 +42,14 @@ public class EmailService {
 	private final JavaMailSender emailSender;
 
 	@Async
-	public void sendEmail(String email, String fullName, String bookingTable, 	 int template) {
+	public void sendEmail(String email, String fullName, String bookingTable, int template, String type) {
 		MimeMessage message = emailSender.createMimeMessage();
 		try {
 			MimeMessageHelper helper = new MimeMessageHelper(message, true);
 			helper.setFrom("enquiry@nkdroptaxi.com");
 			helper.setTo(email);
 			helper.setSubject(getEmailTemplateBody(template));
-			helper.setText(buildEmailTemplate(fullName, template, bookingTable), true);
+			helper.setText(buildEmailTemplate(fullName, template, bookingTable, type), true);
 			emailSender.send(message);
 			log.info("Email sent successfully to {}", email);
 		} catch (MessagingException | MailException e) {
@@ -57,11 +57,17 @@ public class EmailService {
 		}
 	}
 
-	public String buildEmailTemplate(String fullName, int template, String bookingTable) {
+	public String buildEmailTemplate(String fullName, int template, String bookingTable, String type) {
+		String noteContent;
+		if(type.equals("roundTrip")){
+			noteContent = "Maximum 250km per day.";
+		}else {
+			noteContent = "Maximum 130kms package.";
+		}
 		String timestamp = LocalDateTime.now()
 				.format(DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a"));
 		return loadHtmlTemplate(template).replace("{{fullName}}", fullName).replace("{{timestamp}}", timestamp).replace("{{bookingTable}}",
-				bookingTable);
+				bookingTable).replace("{{noteContent}}", noteContent);
 	}
 
 	private String getEmailTemplateBody(int template) {

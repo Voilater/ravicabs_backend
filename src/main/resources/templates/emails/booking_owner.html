@@ -29,12 +29,20 @@
         }
         th, td {
             padding: 10px;
-            border: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
         }
-        th { 
-			background: #007BFF; 
-			color: white; 
-		}
+        th {
+            text-align: left;
+            background-color: #f1f1f1;
+        }
+		.note {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-left: 4px solid #ffeeba;
+            margin-top: 15px;
+            font-size: 14px;
+        }
 		.timestamp {
 			margin-top: 10px;
 			font-size: 12px;
@@ -49,16 +57,12 @@
 	<p>You have received a new booking request. Details are below:</p>
 
 	<table>
-		<thead>
-		<tr>
-			<th>Field</th>
-			<th>Value</th>
-		</tr>
-		</thead>
-		<tbody>
 		{{bookingTable}}
-		</tbody>
 	</table>
+
+	<div class="note">
+		<strong>Note:</strong> Toll Gate, Waiting charges, Parking and State Permit are extra. {{noteContent}}.
+	</div>
 
 	<div class="timestamp">
 		Booking created on: {{timestamp}}
