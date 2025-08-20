@@ -54,6 +54,7 @@ public class MyTelegramBot extends TelegramLongPollingBot {
     public void sendBookingDetailsToGroup(Map<String, String> data) {
         String mobile = data.get("mobileNumber");
         String tripType = data.getOrDefault("tripType", "").trim();
+        String driverBeta = data.getOrDefault("driverBeta", "").trim();
 
         String returnDateLine = "";
         if ("roundWay".equalsIgnoreCase(tripType)) {
@@ -79,6 +80,7 @@ public class MyTelegramBot extends TelegramLongPollingBot {
         ⏱️ *Total Duration:* %s
         💰 *Rate Per Km:* %s
         💰 *Extra Per Km:* %s
+        %s
 
         _Note: Toll gate, waiting charges, parking, and state permit are extra. Maximum 130kms package._
         """,
@@ -96,7 +98,8 @@ public class MyTelegramBot extends TelegramLongPollingBot {
                 data.get("price"),
                 data.get("totalDuration"),
                 data.get("ratePerKm"),
-                data.get("extraPerKm")
+                data.get("extraPerKm"),
+                driverBeta
         );
 
         SendMessage sendMessage = new SendMessage();

@@ -43,6 +43,9 @@ public class MyController {
                 .filter(entry -> entry.getValue() != null && !entry.getValue().trim().isEmpty())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         String bookingTable = generateBookingTable(filteredRequest);
+        if(filteredRequest.get("tripType").equals("roundTrip")){
+            filteredRequest.put("driverBeta", "Rs 400 per day.");
+        }
         myTelegramBot.sendBookingDetailsToGroup(filteredRequest);
         sendMailService.sendEmail(filteredRequest.get("email"), filteredRequest.get("fullName"), bookingTable,1, filteredRequest.get("tripType"));
         sendMailService.sendEmail(to, filteredRequest.get("fullName"), bookingTable, 2, filteredRequest.get("tripType"));
