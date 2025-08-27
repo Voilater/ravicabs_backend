@@ -22,10 +22,16 @@ import java.util.stream.Collectors;
 @CrossOrigin("*")
 public class MyController {
     
-    private static final String to = "enquiry@nkdroptaxi.com";
+    private static final String to = "nkdroptaxi@gmail.com";
     
     private final EmailService sendMailService;
     private final MyTelegramBot myTelegramBot;
+
+    @GetMapping
+    public String test(){
+        return "Ok.";
+    }
+
     
     @PostMapping("/send-email")
     public void sendEmail(@RequestBody Map<String, String> emailRequest) {
@@ -43,7 +49,7 @@ public class MyController {
                 .filter(entry -> entry.getValue() != null && !entry.getValue().trim().isEmpty())
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
         String bookingTable = generateBookingTable(filteredRequest);
-        if(filteredRequest.get("tripType").equals("roundTrip")){
+        if(filteredRequest.get("tripType").trim().equals("roundTrip")){
             filteredRequest.put("driverBeta", "Rs 400 per day.");
         }
         myTelegramBot.sendBookingDetailsToGroup(filteredRequest);
