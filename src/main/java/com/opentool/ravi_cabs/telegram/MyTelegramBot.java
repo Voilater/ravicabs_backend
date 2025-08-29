@@ -54,38 +54,39 @@ public class MyTelegramBot extends TelegramLongPollingBot {
     public void sendBookingDetailsToGroup(Map<String, String> data) {
         String mobile = data.get("mobileNumber");
         String tripType = data.getOrDefault("tripType", "").trim();
-        String driverBeta = data.getOrDefault("driverBeta", "Included").trim();
+        String driverBeta = "";
 
         String returnDateLine = "";
         String notes = "Minimum 130kms package";
         if ("roundTrip".equalsIgnoreCase(tripType)) {
             returnDateLine = String.format("🔁 *Return Date:* %s\n", data.getOrDefault("returnDate", "N/A"));
             notes = "Minimum 250kms package";
+            driverBeta = "💰 <b>Driver Beta:</b> Rs 400 per day.";
         }
 
         String message = String.format("""
-        🚗 *New Booking Received!*
+                        🚗 <b>New Booking Received!</b>
 
-        👤 *Name:* %s
-        📧 *Email:* %s
-        📱 *Mobile:* [%s](tel:%s)
+                        👤 <b>Name:</b> %s
+                        📧 <b>Email:</b> %s
+                        📱 <b>Mobile:</b> <a href="tel:%s">%s</a>
 
-        📍 *Pickup:* %s
-        📍 *Drop:* %s
-        🗓️ *Date:* %s
-        🕒 *Time:* %s
-        %s
-        🚕 *Vehicle Type:* %s
-        🔁 *Trip Type:* %s
-        📏 *Distance:* %s
-        💰 *Price:* %s
-        ⏱️ *Total Duration:* %s
-        💰 *Rate Per Km:* %s
-        💰 *Extra Per Km:* %s
-        💰 *Driver Beta:* %s
+                        📍 <b>Pickup:</b> %s
+                        📍 <b>Drop:</b> %s
+                        🗓️ <b>Date:</b> %s
+                        🕒 <b>Time:</b> %s
+                        %s
+                        🚕 <b>Vehicle Type:</b> %s
+                        🔁 <b>Trip Type:</b> %s
+                        📏 <b>Distance:</b> %s
+                        💰 <b>Price:</b> %s
+                        ⏱️ <b>Total Duration:</b> %s
+                        💰 <b>Rate Per Km:</b> %s
+                        💰 <b>Extra Per Km:</b> %s
+                        %s
 
-        _Note: Toll gate, waiting charges, parking, and state permit are extra. %s._
-        """,
+                        <i>Note: Toll gate, waiting charges, parking, and state permit are extra. %s.</i>
+                        """,
                 data.get("fullName"),
                 data.get("email"),
                 mobile, mobile,
@@ -108,7 +109,7 @@ public class MyTelegramBot extends TelegramLongPollingBot {
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId("-4889776061");
         sendMessage.setText(message);
-        sendMessage.setParseMode("Markdown");
+        sendMessage.setParseMode("HTML");
 
         try {
             execute(sendMessage);
