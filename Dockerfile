@@ -8,7 +8,7 @@ COPY . .
 # Build the project, skip tests for faster image build
 RUN gradle clean build -x test
 
-# ---------- Runtime Stage ----------
+# ---------- Runtime Stage -----------
 FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /app
 
